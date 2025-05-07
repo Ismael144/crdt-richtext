@@ -76,9 +76,9 @@ pub fn main() {
     } else {
         println!("Running on random generated actions 10k");
         let mut rng = rand::rngs::StdRng::seed_from_u64(123);
-        let data: HeapVec<u8> = (0..1_000_000).map(|_| rng.gen()).collect();
-        let mut gen = Unstructured::new(&data);
-        let actions: [RandomAction; 10_000] = gen.arbitrary().unwrap();
+        let data: HeapVec<u8> = (0..1_000_000).map(|_| rng.r#gen()).collect();
+        let mut r#gen = Unstructured::new(&data);
+        let actions: [RandomAction; 10_000] = r#gen.arbitrary().unwrap();
 
         let mut rope = RichText::new(1);
         for _ in 0..10000 {
