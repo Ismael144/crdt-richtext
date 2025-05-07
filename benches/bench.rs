@@ -67,12 +67,12 @@ fn real(c: &mut Criterion) {
     b.bench_function("annotate to 1000 annotations", |b| {
         let guard = PProfGuard::new("target/annotate_flamegraph.svg");
         b.iter(|| {
-            let mut gen = rand::rngs::StdRng::seed_from_u64(0);
+            let mut r#gen = rand::rngs::StdRng::seed_from_u64(0);
             let mut map = TreeRangeMap::new();
             map.insert_directly(0, 10000);
             for i in 0..1000 {
-                let start = gen.gen_range(0..10000);
-                let end = gen.gen_range(start..10000);
+                let start = r#gen.gen_range(0..10000);
+                let end = r#gen.gen_range(start..10000);
                 map.annotate(start, end - start, a(i));
             }
         });
@@ -82,17 +82,17 @@ fn real(c: &mut Criterion) {
     b.bench_function("random inserts 10K", |b| {
         let guard = PProfGuard::new("target/insert_flamegraph.svg");
         b.iter(|| {
-            let mut gen = rand::rngs::StdRng::seed_from_u64(0);
+            let mut r#gen = rand::rngs::StdRng::seed_from_u64(0);
             let mut map = TreeRangeMap::new();
             map.insert_directly(0, 10000);
             for i in 0..1000 {
-                let start = gen.gen_range(0..10000);
-                let end = gen.gen_range(start..10000);
+                let start = r#gen.gen_range(0..10000);
+                let end = r#gen.gen_range(start..10000);
                 map.annotate(start, end - start, a(i));
             }
             for _ in 0..10_000 {
-                let start = gen.gen_range(0..10000);
-                let end = gen.gen_range(start..10000);
+                let start = r#gen.gen_range(0..10000);
+                let end = r#gen.gen_range(start..10000);
                 map.insert_directly(start, end - start);
             }
         });
